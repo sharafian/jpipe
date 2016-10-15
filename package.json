@@ -1,0 +1,13 @@
+{
+  "name": "jpipe",
+  "version": "1.0.0",
+  "description": "tool to easily process stdin and print to stdout",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "jpipe": "jpipe.js"
+  },
+  "author": "Ben Sharafian <ben@sharafian.me>",
+  "license": "ISC"
+}
