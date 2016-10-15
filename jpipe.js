@@ -48,7 +48,7 @@ pipe.on('line', (line) => {
     return
   }
 
-  if (!out && !program.falsey) return
+  if (out !== 0 && !out && !program.falsey) return
   if (program.trim) out = out.trim()
 
   process.stdout.write('' + out)
