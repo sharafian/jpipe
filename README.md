@@ -23,11 +23,11 @@ as described:
 ## Usage
 
 ```js
-cat numbers.txt | jp '_ + 10' > numbers_plus_ten.txt
+cat numbers.txt | jp '+_ + 10' > numbers_plus_ten.txt
 ```
 
 Each line of the file `numbers.txt` is assigned to the variable `_`, and the
-result of `_ + 10` is printed to `STDOUT`, which is then redirected into
+result of `+_ + 10` is printed to `STDOUT`, which is then redirected into
 `numbers_plus_ten.txt`.
 
 If the result of this computation is a falsey value (other than `0`, which is
