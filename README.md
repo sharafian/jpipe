@@ -1,4 +1,7 @@
-# JPipe
+# JPipe [![npm][npm-image]][npm-url]
+
+[npm-image]: https://img.shields.io/npm/v/jpipe.svg?style=flat
+[npm-url]: https://npmjs.org/package/jpipe
 
 > stream editor using javascript
 
