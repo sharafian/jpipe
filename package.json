@@ -1,7 +1,7 @@
 {
   "name": "jpipe",
   "version": "1.0.0",
-  "description": "tool to easily process stdin and print to stdout",
+  "description": "stream editor using javascript expressions",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

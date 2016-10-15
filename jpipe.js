@@ -9,7 +9,7 @@ process.on('uncaughtException', (err) => {
 })
 
 program
-  .usage('[options] <script>')
+  .usage('[options] <expression>')
   .version('1.0.0')
 //  .option('-r, --require [module]', 'require a module')
   .option('-s, --swallow', 'swallow errors')
