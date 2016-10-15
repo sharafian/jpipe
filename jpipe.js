@@ -11,7 +11,7 @@ process.on('uncaughtException', (err) => {
 program
   .usage('[options] <script>')
   .version('1.0.0')
-  .option('-r, --require [module]', 'require a module')
+//  .option('-r, --require [module]', 'require a module')
   .option('-s, --swallow', 'swallow errors')
   .option('-t, --trim', 'trim whitespace from output')
   .option('-n, --nonewline', 'don\'t add newline (as `echo -n`)')
