@@ -13,12 +13,13 @@ program
   .description(
       'A stream editor in javascript. Evaluates <expression> for each\n'
     + '  line of STDIN, where:\n\n'
-    + '      _ = the current line\n'
-    + '  _line = the current line number (starting at 0)\n'
-    + '  _prev = the previous result of the expression\n'
-    + '          (starts as \'\' or as [value] if --initial is set)\n\n'
-    + '  chalk = the \'chalk\' module.')
-  .version('1.0.0')
+    + '       _ = the current line\n'
+    + '   _line = the current line number (starting at 0)\n'
+    + '   _prev = the previous result of the expression\n'
+    + '           (starts as \'\' or as [value] if --initial is set)\n\n'
+    + '   chalk = the \'chalk\' module.\n'
+    + ' require = the \'require\' function.')
+  .version('1.1.1')
 //  .option('-r, --require [module]', 'require a module')
   .option('-r, --reduce', 'print only the last value computed')
   .option('-i, --initial [value]', 'set the inital value of "_prev"')
@@ -53,7 +54,8 @@ pipe.on('line', (line) => {
       '_line': lineNumber++, // current line number
       '_prev': previous, // aggregator
 
-      'chalk': chalk // include the chalk module
+      'chalk': chalk, // include the chalk module
+      'require': require // allow new modules to be required
 
     }))
   } catch (e) {

@@ -16,12 +16,13 @@ as described:
   A stream editor in javascript. Evaluates <expression> for each
   line of STDIN, where:
 
-      _ = the current line
-  _line = the current line number (starting at 0)
-  _prev = the previous result of the expression
-          (starts as '' or as [value] if --initial is set)
+       _ = the current line
+   _line = the current line number (starting at 0)
+   _prev = the previous result of the expression
+           (starts as '' or as [value] if --initial is set)
 
-  chalk = the 'chalk' module.
+   chalk = the 'chalk' module.
+ require = the 'require' function.
 
   Options:
 
@@ -57,6 +58,8 @@ Some special values come bound in the expression you give `jp`:
 - `_prev` is bound to the result of the last expression.
 - `chalk` is bound to the module [chalk](https://github.com/chalk/chalk),
   which is very convenient for coloring output.
+- `require` is bound to the node `require` function, allowing more outside
+  modules to be used.
 
 ## Examples
 
