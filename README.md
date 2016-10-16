@@ -63,13 +63,16 @@ Some special values come bound in the expression you give `jp`:
 
 ## Examples
 
+- `cat text.txt | jp --falsey 'chalk.yellow(_)'` - Print all lines of a file in
+  yellow.
 - `cat numbers.txt | jp --reduce '+_prev + +_'` - Sum all numbers in a file.
 - `cat tabular.txt | jp --reduce '+_prev + +(_.split(/\s+/)[1])'` - Sum the
   second whitespace-separated field of all lines in a file.
 - `cat objs.txt | jp 'JSON.parse(_).value'` - Get field `value` from each line
   of a file where every line is a JSON object.
-- `cat rows.txt | jp --reduce --initial '[]' 'JSON.parse(_prev).concat(JSON.parse(_))'` -
-  concatenate all arrays in a file where each line is a JSON array.
+- `cat rows.txt | jp --reduce --initial '[]'
+  'JSON.parse(_prev).concat(JSON.parse(_))'` - concatenate all arrays in a file
+where each line is a JSON array.
 - `ls | jp '_.match(/\.js$/)? chalk.green(_):_'` - Print all js files in green.
 - `git log --pretty=oneline | jp '_.charAt(0) === "7" && _'` - Print all git
   commits whose hashes begin with `7`
