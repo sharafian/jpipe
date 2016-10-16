@@ -46,3 +46,7 @@ Some special values come bound in the expression you give `jp`:
   which is very convenient for coloring output.
 
 ## Examples
+
+- `ls | jp '_.match(/\.js$/)? chalk.green(_):_'` - Print all js files in green.
+- `git log --pretty=oneline | jp '_.charAt(0) === "7" && _'` - Print all git
+  commits whose hashes begin with `7`
