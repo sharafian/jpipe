@@ -22,12 +22,16 @@ as described:
            (starts as '' or as [value] if --initial is set)
 
    chalk = the 'chalk' module.
- require = the 'require' function.
+
+   other modules are included with the -m flag. For example,
+   '-m "module-name"' assigns 'require("module-name")' to
+   'moduleName'.
 
   Options:
 
     -h, --help             output usage information
     -V, --version          output the version number
+    -m, --module [module]  include a module in your expression
     -r, --reduce           print only the last value computed
     -i, --initial [value]  set the inital value of "_prev"
     -s, --swallow          swallow errors
@@ -58,8 +62,10 @@ Some special values come bound in the expression you give `jp`:
 - `_prev` is bound to the result of the last expression.
 - `chalk` is bound to the module [chalk](https://github.com/chalk/chalk),
   which is very convenient for coloring output.
-- `require` is bound to the node `require` function, allowing more outside
-  modules to be used.
+
+any additional modules you include with the `-m` flag will be `require`d, and
+assigned to a camel-case variable name (`module-name` is assigned to
+`moduleName`)
 
 ## Examples
 
@@ -76,6 +82,11 @@ cat numbers.txt | jp --reduce '+_prev + +_'
 #### Sum second whitespace-separated column in a file
 ```sh
 cat tabular.txt | jp --reduce '+_prev + +(_.split(/\s+/)[1])'`
+```
+
+#### Prepend every line with some random hex
+```sh
+cat text.txt | jp --module 'crypto' 'crypto.randomBytes(2).toString("hex") + " " + _'
 ```
 
 #### Get field `value` from each line of a file (where each line is a JSON object)

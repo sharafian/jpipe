@@ -3,6 +3,20 @@ const readline = require('readline')
 const program = require('commander')
 const vm = require('vm')
 const chalk = require('chalk')
+const camelCase = require('camelcase')
+
+// include modules
+const getModules = function (module, store) {
+  try {
+    console.log(camelCase(module))
+    store[camelCase(module)] = require(module)
+  } catch (e) {
+    // exit if you're requiring an invalid module
+    console.error(chalk.red(e.message))
+    process.exit(1)
+  }
+  return store
+}
 
 process.on('uncaughtException', (err) => {
   console.error(chalk.red(err.stack))
@@ -17,10 +31,13 @@ program
     + '   _line = the current line number (starting at 0)\n'
     + '   _prev = the previous result of the expression\n'
     + '           (starts as \'\' or as [value] if --initial is set)\n\n'
-    + '   chalk = the \'chalk\' module.\n'
-    + ' require = the \'require\' function.')
+    + '   chalk = the \'chalk\' module.\n\n'
+    + '   other modules are included with the -m flag. For example,\n'
+    + '   \'-m "module-name"\' assigns \'require("module-name")\' to\n'
+    + '   \'moduleName\'.')
   .version('1.1.1')
-//  .option('-r, --require [module]', 'require a module')
+  .option('-m, --module [module]', 'include a module in your expression',
+    getModules, {})
   .option('-r, --reduce', 'print only the last value computed')
   .option('-i, --initial [value]', 'set the inital value of "_prev"')
   .option('-s, --swallow', 'swallow errors')
@@ -34,6 +51,7 @@ if (!program.args[0]) {
   process.exit(1)
 }
 
+const modules = program.module // map of module options
 const script = new vm.Script(program.args[0])
 const pipe = readline.createInterface({
   input: process.stdin,
@@ -48,16 +66,15 @@ pipe.on('line', (line) => {
   let out
 
   try {
-    out = script.runInContext(new vm.createContext({
+    out = script.runInContext(new vm.createContext(Object.assign({
 
       '_': line, // current line
       '_line': lineNumber++, // current line number
       '_prev': previous, // aggregator
 
-      'chalk': chalk, // include the chalk module
-      'require': require // allow new modules to be required
+      'chalk': chalk // include the chalk module
 
-    }))
+    }, modules))) // add all included modules to the context
   } catch (e) {
     if (!program.swallow) console.error(chalk.red(e))
     return
