@@ -65,7 +65,12 @@ Some special values come bound in the expression you give `jp`:
 
 any additional modules you include with the `-m` flag will be `require`d, and
 assigned to a camel-case variable name (`module-name` is assigned to
-`moduleName`)
+`moduleName`). If you wish to include globally installed modules, make
+sure to add your global `node_modules` to `NODE_PATH`:
+
+```sh
+export NODE_PATH="$(npm prefix -g)/lib/node_modules:$NODE_PATH"
+```
 
 ## Examples
 
